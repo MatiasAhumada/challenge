@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { deleteTodos, getTodos, getTodosID, postTodos, putTodos } from "../controllers/todosControler";
+
 const tdRoutes= Router();
 
-tdRoutes.get("/api/todos",getTodos)
-tdRoutes.get("/api/todos/:id",getTodosID)
-tdRoutes.post("/api/todos",postTodos)
-tdRoutes.put("/api/todos/:id",putTodos)
-tdRoutes.delete("/api/todos/:id",deleteTodos)
+tdRoutes.get("/todos",getTodos)
+tdRoutes.get("/todos/:id",getTodosID)
+tdRoutes.post("/todos",postTodos)
+tdRoutes.put("/todos/:id",putTodos)
+tdRoutes.delete("/todos/:id",deleteTodos)
 
 export default tdRoutes;
