@@ -60,7 +60,7 @@ export const deleteTodos = async (req: Request, res: Response) => {
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
     }
-    res.status(200).json(todo);
+    res.status(200).json({ message: "Todo deleted" });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
   }
