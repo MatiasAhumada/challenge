@@ -1,3 +1,4 @@
+import { todo } from "node:test";
 import Todos from "../config/model/todosModel";
 import { TodosDTO, TodosResponse } from "../dto/todosDto";
 
@@ -11,10 +12,10 @@ export const getTodosSVID = async (id: string): Promise<TodosDTO | null> => {
   return todo;
 };
 
-export const postTodosSV = async (todo: TodosDTO): Promise<TodosResponse|null> => {
+export const postTodosSV = async (todo: TodosDTO): Promise<TodosResponse | null> => {
   const newTodo = await Todos.create(todo);
   if (!newTodo || !newTodo.title) {
-    return null; 
+    return null;
   }
   return {
     title: newTodo.title,
@@ -22,6 +23,15 @@ export const postTodosSV = async (todo: TodosDTO): Promise<TodosResponse|null> =
   };
 };
 
-export const putTodosSV = async (id: string) => {};
+export const putTodosSV = async (id: string, todoput: TodosDTO)=> {
+  const todoPut= await Todos.findByIdAndUpdate(id,todoput)
+  if (!todoPut) {
+    return null;
+  }
+  const newTodoPut=await getTodosSVID(id);
+
+ return newTodoPut;
+  
+};
 
 export const deleteTodosSV = async (id: string) => {};

@@ -1,8 +1,8 @@
 import TodosDTO from "../dto/todosDto";
-import { getTodosSv, getTodosSVID, postTodosSV } from "../services/todosServise";
+import { getTodosSv, getTodosSVID, postTodosSV, putTodosSV } from "../services/todosServise";
 import { Request, Response } from "express";
 
-export const getTodos = async (req: Request, res: Response): Promise<void> => {
+export const getTodos = async (req: Request, res: Response) => {
   try {
     const todos: TodosDTO[] = await getTodosSv();
     res.status(200).json(todos);
@@ -34,5 +34,20 @@ export const postTodos = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-export const putTodos = async (req: Request, res: Response) => {};
+export const putTodos = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { title } = req.body;
+  if (!id) {
+    res.status(400).json({ message: "id is required" });
+  }
+  try {
+    const todo = await putTodosSV(id, { title });
+    if (!todo) {
+      res.status(404).json({ message: "Todo not found" });
+    }
+    res.status(200).json(todo);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 export const deleteTodos = async (req: Request, res: Response) => {};
