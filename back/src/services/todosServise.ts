@@ -23,15 +23,20 @@ export const postTodosSV = async (todo: TodosDTO): Promise<TodosResponse | null>
   };
 };
 
-export const putTodosSV = async (id: string, todoput: TodosDTO)=> {
-  const todoPut= await Todos.findByIdAndUpdate(id,todoput)
+export const putTodosSV = async (id: string, todoput: TodosDTO) => {
+  const todoPut = await Todos.findByIdAndUpdate(id, todoput);
   if (!todoPut) {
     return null;
   }
-  const newTodoPut=await getTodosSVID(id);
+  const newTodoPut = await getTodosSVID(id);
 
- return newTodoPut;
-  
+  return newTodoPut;
 };
 
-export const deleteTodosSV = async (id: string) => {};
+export const deleteTodosSV = async (id: string) => {
+  const todo = await Todos.findByIdAndDelete(id);
+  if (!todo) {
+    return null;
+  }
+  return todo;
+};
