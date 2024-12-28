@@ -1,5 +1,5 @@
 import TodosDTO from "../dto/todosDto";
-import { deleteTodosSV, getTodosSv, getTodosSVID, postTodosSV, putTodosSV } from "../services/todosServise";
+import { deleteTodosSV, getTodosSv, getTodosSVID, postTodosSV, putTodosSV } from "../services/todosService";
 import { Request, Response } from "express";
 
 export const getTodos = async (req: Request, res: Response) => {

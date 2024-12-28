@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { consultDuplicate } from "../services/todosServise";
+import { consultDuplicate } from "../services/todosService";
 
 const validateData = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { title } = req.body;
