@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { Request, Response } from "express";
 
-import { registerUser } from "../controllers/users";
+import { loginUser, registerUser } from "../controllers/users";
 
 const usRT = Router();
 
 usRT.post("/register", registerUser);
 
-usRT.post("/login", (req: Request, res: Response) => {});
+usRT.get("/login", loginUser);
 
 usRT.get("/logout", (req, res) => {});
 
