@@ -40,3 +40,8 @@ export const deleteTodosSV = async (id: string) => {
   }
   return todo;
 };
+
+export const consultDuplicate = async (title: string) => {
+  const existingTodo = await Todos.findOne({ title });
+  return existingTodo;
+}
