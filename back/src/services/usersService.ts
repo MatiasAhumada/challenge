@@ -10,7 +10,9 @@ export const registerUserSV = async (user: userDto) => {
   try {
     const userExist = await Users.findOne({ email: user.email });
     if (userExist) {
-      throw new Error("User already exists");
+      const error: any = new Error("User already exists");
+      error.statusCode = 404;
+      throw error;
     }
     const newUser = await Users.create(user);
     const token = jwt.sign({ id: newUser._id }, String(JWT_SECRET), { expiresIn: "1d" });
@@ -31,7 +33,7 @@ export const loginUserSV = async (user: userDto) => {
     }
     const isMatch = await bcrypt.compare(user.password, userExist.password);
     if (!isMatch) {
-      const error: any =new Error("Invalid credentials");
+      const error: any = new Error("Invalid credentials");
       error.statusCode = 404;
       throw error;
     }
