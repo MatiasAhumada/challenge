@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Request, Response } from "express";
 
-import { loginUser, registerUser } from "../controllers/users";
+import { getUsers, loginUser, registerUSAuth0, registerUser } from "../controllers/users";
 
 const usRT = Router();
 
@@ -75,11 +75,14 @@ usRT.post("/register", registerUser);
 
 usRT.get("/login", loginUser);
 
-usRT.get("/logout", (req, res) => {});
+usRT.get("/logout", (req, res) => {
+  res.status(200).send("Logout");
+});
+usRT.get("/users", getUsers);
 
 usRT.get("/profile", (req, res) => {
   if (req.oidc?.isAuthenticated()) {
-    res.send(req.oidc.user);
+    registerUSAuth0(req.oidc.user, res);
   } else {
     res.send("Logout");
   }
