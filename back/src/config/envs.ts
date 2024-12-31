@@ -1,5 +1,14 @@
 import "dotenv/config";
 
+
+const getEnvVariable = (key: string, required = true): string => {
+    const value = process.env[key];
+    if (required && !value) {
+      throw new Error(`Environment variable ${key} is required but not defined`);
+    }
+    return value as string;
+  };
+
 export const PORT = process.env.PORT;
 export const DB_URL = process.env.URL;
 export const AUTH0_SECRET = process.env.AUTH0_SECRET;

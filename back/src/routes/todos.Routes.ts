@@ -1,18 +1,17 @@
 import { Router } from "express";
 import { deleteTodos, getTodos, getTodosID, postTodos, putTodos } from "../controllers/todosControler";
-import validateData from "../middleware/postMiddleware";
+import authMiddleware from "../middleware/authBearer";
 
-const tdRoutes= Router();
+const tdRoutes = Router();
 
-tdRoutes.get("/todos",getTodos)
+tdRoutes.get("/todos", authMiddleware, getTodos);
 
-tdRoutes.get("/todos/:id",getTodosID)
+tdRoutes.get("/todos/:id", authMiddleware, getTodosID);
 
-tdRoutes.post("/todos",validateData,postTodos)
+tdRoutes.post("/todos", authMiddleware, postTodos);
 
-tdRoutes.put("/todos/:id",putTodos)
+tdRoutes.put("/todos/:id", authMiddleware, putTodos);
 
-tdRoutes.delete("/todos/:id",deleteTodos)
-
+tdRoutes.delete("/todos/:id", authMiddleware, deleteTodos);
 
 export default tdRoutes;

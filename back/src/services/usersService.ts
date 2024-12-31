@@ -6,8 +6,7 @@ import userDto, { userResponseDTO } from "../dto/usersDTO";
 import bcrypt from "bcryptjs";
 import { Error } from "mongoose";
 
-export const registerUserSV = async (user: userDto) => {
-  console.log(user)
+export const registerUserSV = async (user: userDto): Promise<userResponseDTO> => {
   try {
     const userExist = await Users.findOne({ email: user.email });
     if (userExist) {
@@ -18,7 +17,7 @@ export const registerUserSV = async (user: userDto) => {
     const newUser = await Users.create(user);
     const token = jwt.sign({ id: newUser._id }, String(JWT_SECRET), { expiresIn: "1d" });
 
-    return token;
+    return { token: token };
   } catch (error) {
     throw error;
   }
@@ -29,22 +28,22 @@ export const loginUserSV = async (user: userDto): Promise<userResponseDTO> => {
     const userExist = await Users.findOne({ email: user.email });
     if (!userExist) {
       const error: any = new Error("User not exists");
-      error.statusCode = 404;
+      error.statusCode = 401;
       throw error;
     }
     const isMatch = await bcrypt.compare(user.password, userExist.password);
     if (!isMatch) {
-      const error: any = new Error("Invalid credentials");
+      const error: any = new Error("Invalid password");
       error.statusCode = 404;
       throw error;
     }
     const token = jwt.sign({ id: userExist._id }, String(JWT_SECRET), { expiresIn: "1d" });
-    return {token: token};
+    return { token: token };
   } catch (error) {
     throw error;
   }
 };
-export const usersSV = async () => {
+export const usersSV = async ():Promise<userDto[]> => {
   try {
     const users = await Users.find();
     return users;
