@@ -18,7 +18,7 @@ export const getTodosID = async (req: Request, res: Response) => {
   try {
     const todo = await getTodosSVID(id);
     if (!todo) {
-      res.status(404).json({ message: "Todo not found" });
+      res.status(404).json({ message: "Todo not exist" });
     }
     res.status(200).json(todo);
   } catch (error) {
@@ -58,7 +58,7 @@ export const deleteTodos = async (req: Request, res: Response) => {
   try {
     const todo = await deleteTodosSV(id);
     if (!todo) {
-      res.status(404).json({ message: "Todo not found" });
+      res.status(404).json({ message: "Todo not exist" });
     }
     res.status(200).json({ message: "Todo deleted" });
   } catch (error) {

@@ -18,7 +18,7 @@ const options = {
       },
     ],
   },
-  apis: ["./src/routes/**.Routes.ts"],
+  apis: ["./src/config/*.yml"],
 };
 const config = swaggerJsdoc(options);
 export default config;

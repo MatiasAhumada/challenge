@@ -2,8 +2,8 @@ import { todo } from "node:test";
 import Todos from "../config/model/todosModel";
 import { TodosDTO, TodosResponse } from "../dto/todosDto";
 
-export const getTodosSv = async (): Promise<TodosDTO[]> => {
-  const todos: TodosDTO[] = await Todos.find();
+export const getTodosSv = async (): Promise<TodosResponse[]> => {
+  const todos: TodosResponse[] = await Todos.find();
   return todos;
 };
 
