@@ -17,11 +17,11 @@ usRT.get("/logout", (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-usRT.get("/users", getUsers);
+usRT.get("/", getUsers);
 
-usRT.get("/profile", (req, res) => {
+usRT.get("/profile", (req, res, next) => {
   if (req.oidc?.isAuthenticated()) {
-    registerUSAuth0(req.oidc.user, res);
+    registerUSAuth0(req.oidc.user, res, next);
   } else {
     res.send("Logout");
   }
