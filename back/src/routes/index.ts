@@ -19,7 +19,8 @@ router.use("/api", tdRoutes);
 router.use("/users", usRT);
 
 router.get("/", (req, res) => {
-  res.redirect("/users/profile");
+  res.send("Welcome to the API!"); 
+  //res.redirect("/users/profile");
 });
 
 export default router;
